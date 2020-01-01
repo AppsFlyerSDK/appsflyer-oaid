@@ -1,0 +1,33 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.appsflyer.oaid.test" >
+4
+5    <uses-sdk
+5-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:5:5-74
+6        android:minSdkVersion="14"
+6-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:5:15-41
+7        android:targetSdkVersion="28" />
+7-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:5:42-71
+8
+9    <instrumentation
+9-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:11:5-15:73
+10        android:name="android.test.InstrumentationTestRunner"
+10-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:11:22-75
+11        android:functionalTest="false"
+11-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:14:22-52
+12        android:handleProfiling="false"
+12-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:13:22-53
+13        android:label="Tests for com.appsflyer.oaid.test"
+13-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:15:22-71
+14        android:targetPackage="com.appsflyer.oaid.test" />
+14-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:12:22-69
+15
+16    <application android:debuggable="true" >
+16-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:7:5-9:19
+16-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:7:18-43
+17        <uses-library android:name="android.test.runner" />
+17-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:8:9-60
+17-->/Users/maxim/Appsflyer/projects/ANDROID/appsflyer-oaid/oaid/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger1293290358749711620.xml:8:23-57
+18    </application>
+19
+20</manifest>
