@@ -20,6 +20,7 @@ final class OaidClient {
 
         // handle Xiaomi
         try {
+            Class.forName("com.android.id.impl.IdProviderImpl");
             if (IdentifierManager.isSupported())
                 return new Info(IdentifierManager.getOAID(context));
         } catch (Throwable ignored) {
