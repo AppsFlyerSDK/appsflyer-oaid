@@ -21,6 +21,7 @@ android {
 
 dependencies {
     implementation project(':oaid')
+    implementation 'com.android.installreferrer:installreferrer:1.1'
     implementation 'com.appsflyer:af-android-sdk-beta:5.1.0-rc10@aar'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
