@@ -10,8 +10,11 @@ android {
         minSdkVersion 14
     }
 }
+repositories {
+    maven { url 'http://developer.huawei.com/repo/' }
+}
 dependencies {
     implementation "com.huawei.hms:hms-ads-identifier:${safeExtGet('huaweiVersion', '3.4.26.303')}"
     implementation files('libs/xiaomi-oaid-sdk.jar')
 }
-apply from: rootProject.file('oaid/publish.gradle')
+apply from: file('publish.gradle')
