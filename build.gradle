@@ -1,17 +1,12 @@
 buildscript {
-
     ext.huaweiVersion = '3.4.26.303'
-
     repositories {
         google()
         jcenter()
-        maven {url 'http://developer.huawei.com/repo/'}
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
-//        classpath 'com.android.tools.build:gradle:3.4.0'
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.9.0"
-        classpath 'com.huawei.agconnect:agcp:1.0.0.300'
     }
 }
 apply plugin: 'io.codearte.nexus-staging'
@@ -21,7 +16,7 @@ def getRepositoryUsername() { return hasProperty('ossrhUsername') ? ossrhUsernam
 def getRepositoryPassword() { return hasProperty('ossrhPassword') ? ossrhPassword : "" }
 
 nexusStaging {
-    packageGroup = GROUP //optional if packageGroup == project.getGroup()
+    packageGroup = GROUP // optional if packageGroup == project.getGroup()
     username = getRepositoryUsername()
     password = getRepositoryPassword()
 }
@@ -29,7 +24,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {url 'http://developer.huawei.com/repo/'}
+        maven { url 'http://developer.huawei.com/repo/' }
     }
 }
 task clean(type: Delete) { delete rootProject.buildDir }
