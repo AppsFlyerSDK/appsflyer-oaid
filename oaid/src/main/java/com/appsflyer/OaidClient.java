@@ -17,8 +17,7 @@ final class OaidClient {
         }
         // Xiaomi
         try {
-            // preventing log from next line
-            Class.forName("com.android.id.impl.IdProviderImpl");
+            Class.forName("com.android.id.impl.IdProviderImpl"); // preventing log from next line
             if (IdentifierManager.isSupported())
                 return new Info(IdentifierManager.getOAID(context));
         } catch (Throwable ignored) {
