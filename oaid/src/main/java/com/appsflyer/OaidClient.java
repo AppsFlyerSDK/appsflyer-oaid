@@ -2,14 +2,12 @@ package com.appsflyer;
 
 import android.content.Context;
 
-
 import com.huawei.hms.ads.identifier.AdvertisingIdClient;
 import com.miui.deviceid.IdentifierManager;
 
 final class OaidClient {
     static Info fetch(Context context) {
-
-        // handle Huawei
+        // Huawei
         try {
             if (AdvertisingIdClient.isAdvertisingIdAvailable(context)) {
                 AdvertisingIdClient.Info info = AdvertisingIdClient.getAdvertisingIdInfo(context);
@@ -17,9 +15,10 @@ final class OaidClient {
             }
         } catch (Throwable ignored) {
         }
-
-        // handle Xiaomi
+        // Xiaomi
         try {
+            // preventing log from next line
+            Class.forName("com.android.id.impl.IdProviderImpl");
             if (IdentifierManager.isSupported())
                 return new Info(IdentifierManager.getOAID(context));
         } catch (Throwable ignored) {
