@@ -5,6 +5,63 @@
 
 This Card describes how OAID can be collected.
 
+
+## Table of content
+
+- [Adding the OAID SDK to your project](#installation)
+- [Initializing the SDK](#init-sdk)
+- [Stand Alone Usage](#standalone)
+  
+
+
+Supported devices:
+
+Kit | Maven Artifact 
+----|---------
+Xiaomi|  [`xiaomi-oaid-sdk.jar`](https://github.com/AppsFlyerSDK/appsflyer-oaid/blob/master/oaid/libs/xiaomi-oaid-sdk.jar)
+Huawei|  [`com.huawei.hms:hms-ads-identifier:3.4.26.303](https://github.com/AppsFlyerSDK/appsflyer-oaid/blob/master/oaid/build.gradle#L17)
+
+
+
+
+## <a id="installation"> Adding the SDK to your project
+
+
+For Appsflyer SDK use a gradle:
+
+```
+implementation 'com.appsflyer:oaid:5.1.0'
+```
+
+
+## <a id="standalone"> Stand Alone Usage
+  
+  
+- Add Huawei SDK to their project.
+In `build.gradle`:
+
+	- Add repository
+  
+```  
+	maven { url 'http://developer.huawei.com/repo/' }
+```  
+	
+	- Add dependency
+```
+	implementation 'com.huawei.hms:hms-ads-identifier:3.4.26.303'
+```  
+  
+
+```java
+ OaidClient.Info oaidInfo = OaidClient.fetch(context);
+ if (oaidInfo != null) {
+    oaid = oaidInfo.getId();
+  }
+```
+
+---
+
+
 🛠 In order for us to provide optimal support, we would kindly ask you to submit any issues to support@appsflyer.com
 
 *When submitting an issue please specify your AppsFlyer sign-up (account) email , your app ID , production steps, logs, code snippets and any additional relevant information.*
