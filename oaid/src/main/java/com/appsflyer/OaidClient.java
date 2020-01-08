@@ -5,8 +5,8 @@ import android.content.Context;
 import com.huawei.hms.ads.identifier.AdvertisingIdClient;
 import com.miui.deviceid.IdentifierManager;
 
-final class OaidClient {
-    static Info fetch(Context context) {
+public final class OaidClient {
+    public static Info fetch(Context context) {
         // Huawei
         try {
             if (AdvertisingIdClient.isAdvertisingIdAvailable(context)) {
@@ -25,7 +25,7 @@ final class OaidClient {
         return null;
     }
 
-    static class Info {
+    public static class Info {
         private final Boolean lat;
         private final String id;
 

@@ -5,6 +5,7 @@ import android.os.StrictMode;
 
 import com.appsflyer.AFLogger;
 import com.appsflyer.AppsFlyerLib;
+import com.appsflyer.OaidClient;
 
 public class AFApplication extends Application {
     @Override
@@ -13,9 +14,16 @@ public class AFApplication extends Application {
         StrictMode.enableDefaults();
         AppsFlyerLib appsflyer = AppsFlyerLib.getInstance();
         appsflyer.setLogLevel(AFLogger.LogLevel.VERBOSE);
-        //noinspection SpellCheckingInspection
-        appsflyer.init("WdpTVAcYwmxsaQ4WeTspmh", null, this);
-        appsflyer.startTracking(this);
+        // tell to appsflyer to collect the OAID
         appsflyer.setCollectOaid(true);
+        appsflyer.init("<DEV KEY>", null, this);
+        appsflyer.startTracking(this);
+
+
+        // or get it directly:
+        OaidClient.Info oaidInfo = OaidClient.fetch(this);
+        if (oaidInfo != null) {
+            final String oaid = oaidInfo.getId();
+        }
     }
 }
