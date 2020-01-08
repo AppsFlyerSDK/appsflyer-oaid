@@ -40,17 +40,18 @@ implementation 'com.appsflyer:oaid:5.1.0'
 - Add Huawei SDK to their project.
 In `build.gradle`:
 
-	- Add repository
+ Add repository
   
 ```  
 	maven { url 'http://developer.huawei.com/repo/' }
 ```  
 	
-	- Add dependency
+ Add dependency
 ```
 	implementation 'com.huawei.hms:hms-ads-identifier:3.4.26.303'
 ```  
-  
+
+The usage:
 
 ```java
  OaidClient.Info oaidInfo = OaidClient.fetch(context);
