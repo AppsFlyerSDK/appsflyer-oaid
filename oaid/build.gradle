@@ -24,5 +24,6 @@ android {
 dependencies {
     implementation files('libs/miit_mdid_1.0.10.aar')
     implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'com.huawei.hms:hms-ads-identifier:3.4.26.303'
 }
 apply from: file('publish.gradle')

@@ -1,5 +1,6 @@
 package com.appsflyer.oaid.sample
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.appsflyer.oaid.OaidClient
@@ -7,12 +8,22 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Thread {
-            val oaidString = OaidClient.fetch(this, 1200, TimeUnit.MILLISECONDS)
-            if (oaidString != null) runOnUiThread { oaid.text = oaidString }
+            val info = OaidClient.fetch(this, 1200, TimeUnit.MILLISECONDS)
+            runOnUiThread {
+                if (info == null) {
+                    oaid.text = "No Oaid"
+                } else {
+                    oaid.text = info.id
+                    info.lat?.let {
+                        lat.text = it.toString()
+                    }
+                }
+            }
         }.start()
     }
 }

@@ -23,7 +23,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'http://developer.huawei.com/repo/' }
+        maven { url 'https://developer.huawei.com/repo/' }
     }
 }
 task clean(type: Delete) { delete rootProject.buildDir }
