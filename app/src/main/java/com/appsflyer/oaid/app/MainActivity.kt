@@ -1,4 +1,4 @@
-package com.appsflyer.oaid.sample
+package com.appsflyer.oaid.app
 
 import android.annotation.SuppressLint
 import android.os.Bundle
