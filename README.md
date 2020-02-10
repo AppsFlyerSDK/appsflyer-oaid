@@ -2,8 +2,8 @@
 
 # OAID collection
 ## Table of content
-- [Adding the OAID SDK to your project](#installation)
-- [Standalone usage](#standalone)
+- [Adding to your project](#adding-to-your-project)
+- [Standalone usage](#standalone-usage)
 
 Supported devices:
 
@@ -16,7 +16,7 @@ OPPO            |   Color OS 7.0
 Lenovo          |   ZUI 11.4
 Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Freeme OS, Ssui OS   |   Android 10
 
-## <a id="installation"> Adding the SDK to your project
+## Adding to your project
 project **build.gradle**
 ```groovy
 allprojects {
@@ -30,7 +30,7 @@ module **build.gradle**
 ```groovy
 implementation 'com.appsflyer:oaid:5.2.0'
 ```
-## <a id="standalone"> Standalone Usage
+## Standalone usage
 ```kotlin
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
