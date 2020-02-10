@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-# Important
+## Important
 Time to fetch oaid is around 10 - 1000 ms
 
 ---
