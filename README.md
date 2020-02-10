@@ -64,7 +64,7 @@ The usage:
 
 # Important
 
-Time to fetch oaid is around 10 - 5000 ms
+Time to fetch oaid is around 10 - 1000 ms
 
 
 🛠 In order for us to provide optimal support, we would kindly ask you to submit any issues to support@appsflyer.com

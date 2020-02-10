@@ -26,7 +26,7 @@ public final class OaidClient {
     }
 
     /**
-     * Blocking call. Time to fetch oaid is 10 - 5000 ms.
+     * Blocking call. Time to fetch oaid is 10 - 1000 ms.
      */
     @Nullable
     public static Info fetch(Context context, long timeout, TimeUnit unit) {
@@ -48,18 +48,12 @@ public final class OaidClient {
     }
 
     @Nullable
-    private static Info fetchMsa(Context context, long timeout, TimeUnit unit) throws
-            InterruptedException {
+    private static Info fetchMsa(Context context, long timeout, TimeUnit unit) throws Exception {
         BlockingQueue<String> oaidHolder = new LinkedBlockingQueue<>();
         JLibrary.InitEntry(context);
         int result = MdidSdkHelper.InitSdk(context, BuildConfig.DEBUG, (support, supplier) -> {
             try {
-                if (supplier == null) {
-                    oaidHolder.offer("");
-                } else {
-                    oaidHolder.offer(supplier.getOAID());
-                    supplier.shutDown();
-                }
+                oaidHolder.offer(supplier == null ? "" : supplier.getOAID());
             } catch (Throwable t) {
                 logger.log(Level.SEVERE, "IIdentifierListener", t);
             }
