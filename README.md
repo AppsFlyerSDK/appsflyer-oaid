@@ -1,6 +1,9 @@
 <img src="https://www.appsflyer.com/wp-content/uploads/2016/11/logo-1.svg"  width="450">
 
 # OAID collection
+
+[![Release Artifacts](https://img.shields.io/nexus/r/com.appsflyer/oaid.svg?server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/content/repositories/releases/com/appsflyer/oaid/)
+
 ## Table of content
 - [Adding to your project](#adding-to-your-project)
 - [Standalone usage](#standalone-usage)
@@ -56,5 +59,3 @@ Time to fetch oaid is around 10 - 1000 ms
 
 *When submitting an issue please specify your AppsFlyer sign-up (account) email , your app ID , production steps, logs, code snippets and any additional relevant information.*
 
-
-[![Release Artifacts](https://img.shields.io/nexus/r/com.appsflyer/oaid.svg?server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/content/repositories/releases/com/appsflyer/oaid/)
