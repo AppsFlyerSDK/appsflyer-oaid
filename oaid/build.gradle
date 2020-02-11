@@ -1,20 +1,29 @@
-def safeExtGet(prop, fallback) {
-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-}
-
 apply plugin: 'com.android.library'
 android {
     compileSdkVersion 28
     defaultConfig {
         targetSdkVersion 28
         minSdkVersion 14
+        consumerProguardFiles 'proguard-rules.pro'
+        ndk { abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64', 'armeabi' }
+        packagingOptions {
+            doNotStrip "*/armeabi-v7a/*.so"
+            doNotStrip "*/x86/*.so"
+            doNotStrip "*/arm64-v8a/*.so"
+            doNotStrip "*/x86_64/*.so"
+            doNotStrip "armeabi.so"
+        }
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 }
-repositories {
-    maven { url 'http://developer.huawei.com/repo/' }
-}
 dependencies {
-    implementation "com.huawei.hms:hms-ads-identifier:${safeExtGet('huaweiVersion', '3.4.26.303')}"
-    implementation files('libs/xiaomi-oaid-sdk.jar')
+    implementation files('libs/msa_mdid_1.0.13.aar')
+    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'com.huawei.hms:hms-ads-identifier:3.4.26.303'
 }
 apply from: file('publish.gradle')
