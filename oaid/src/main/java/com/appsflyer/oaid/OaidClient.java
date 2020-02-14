@@ -14,30 +14,34 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-public final class OaidClient {
-    private static final Logger logger =
-            Logger.getLogger("AppsFlyerOaid" + BuildConfig.VERSION_NAME);
+public class OaidClient {
+    private final Logger logger = Logger.getLogger("AppsFlyerOaid" + BuildConfig.VERSION_NAME);
+    private final Context context;
+    private final long timeout;
+    private final TimeUnit unit;
 
-    static {
-        if (!BuildConfig.DEBUG) LogManager.getLogManager().reset();
+    public OaidClient(Context context, long timeout, TimeUnit unit) {
+        this.context = context;
+        this.timeout = timeout;
+        this.unit = unit;
+        logger.setLevel(Level.OFF);
     }
 
     /**
      * Blocking call. Time to fetch oaid is 10 - 1000 ms.
      */
     @Nullable
-    public static Info fetch(Context context, long timeout, TimeUnit unit) {
+    public Info fetch() {
         try {
             long current = System.currentTimeMillis();
             Info info;
             if (Build.MANUFACTURER.equalsIgnoreCase("huawei")) {
-                info = fetchHuawei(context);
-                if (info == null) fetchMsa(context, timeout, unit);
+                info = fetchHuawei();
+                if (info == null) fetchMsa();
             } else {
-                info = fetchMsa(context, timeout, unit);
+                info = fetchMsa();
             }
             logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
             return info;
@@ -48,10 +52,10 @@ public final class OaidClient {
     }
 
     @Nullable
-    private static Info fetchMsa(Context context, long timeout, TimeUnit unit) throws Exception {
+    private Info fetchMsa() throws Exception {
         BlockingQueue<String> oaidHolder = new LinkedBlockingQueue<>();
         JLibrary.InitEntry(context);
-        int result = MdidSdkHelper.InitSdk(context, BuildConfig.DEBUG, (support, supplier) -> {
+        int result = MdidSdkHelper.InitSdk(context, logger.getLevel() == null, (support, supplier) -> {
             try {
                 oaidHolder.offer(supplier == null ? "" : supplier.getOAID());
             } catch (Throwable t) {
@@ -86,7 +90,7 @@ public final class OaidClient {
     }
 
     @Nullable
-    private static Info fetchHuawei(Context context) {
+    private Info fetchHuawei() {
         try {
             if (AdvertisingIdClient.isAdvertisingIdAvailable(context)) {
                 AdvertisingIdClient.Info info = AdvertisingIdClient.getAdvertisingIdInfo(context);
@@ -98,6 +102,10 @@ public final class OaidClient {
             logger.log(Level.SEVERE, "Huawei", t);
             return null;
         }
+    }
+
+    public void setLogging(boolean logging) {
+        logger.setLevel(logging ? null : Level.OFF);
     }
 
     public static class Info {
@@ -117,6 +125,9 @@ public final class OaidClient {
             return id;
         }
 
+        /**
+         * Available only in Huawei
+         */
         @Nullable
         public Boolean getLat() {
             return lat;
