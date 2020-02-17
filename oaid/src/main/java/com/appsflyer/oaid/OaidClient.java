@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import com.bun.miitmdid.core.ErrorCode;
 import com.bun.miitmdid.core.JLibrary;
 import com.bun.miitmdid.core.MdidSdkHelper;
+import com.bun.supplier.IIdentifierListener;
+import com.bun.supplier.IdSupplier;
 import com.huawei.hms.ads.identifier.AdvertisingIdClient;
 
 import java.util.concurrent.BlockingQueue;
@@ -53,13 +55,16 @@ public class OaidClient {
 
     @Nullable
     private Info fetchMsa() throws Exception {
-        BlockingQueue<String> oaidHolder = new LinkedBlockingQueue<>();
+        final BlockingQueue<String> oaidHolder = new LinkedBlockingQueue<>();
         JLibrary.InitEntry(context);
-        int result = MdidSdkHelper.InitSdk(context, logger.getLevel() == null, (support, supplier) -> {
-            try {
-                oaidHolder.offer(supplier == null ? "" : supplier.getOAID());
-            } catch (Throwable t) {
-                logger.log(Level.SEVERE, "IIdentifierListener", t);
+        int result = MdidSdkHelper.InitSdk(context, logger.getLevel() == null, new IIdentifierListener() {
+            @Override
+            public void OnSupport(boolean support, IdSupplier supplier) {
+                try {
+                    oaidHolder.offer(supplier == null ? "" : supplier.getOAID());
+                } catch (Throwable t) {
+                    logger.log(Level.SEVERE, "IIdentifierListener", t);
+                }
             }
         });
         if (result != 0) {
