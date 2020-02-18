@@ -33,6 +33,13 @@ public class OaidClient {
     }
 
     /**
+     * 1 second timeout
+     */
+    public OaidClient(Context context) {
+        this(context, 1, TimeUnit.SECONDS);
+    }
+
+    /**
      * Blocking call. Time to fetch oaid is 10 - 1000 ms.
      */
     @Nullable
