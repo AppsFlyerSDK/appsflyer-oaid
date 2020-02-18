@@ -3,6 +3,7 @@ package com.appsflyer.oaid;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 
 import com.bun.miitmdid.core.ErrorCode;
@@ -117,12 +118,14 @@ public class OaidClient {
         private final Boolean lat;
         private final String id;
 
-        Info(String id, Boolean lat) {
+        @VisibleForTesting
+        public Info(String id, Boolean lat) {
             this.id = id;
             this.lat = lat;
         }
 
-        Info(String id) {
+        @VisibleForTesting
+        public Info(String id) {
             this(id, null);
         }
 
