@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 @Deprecated
 class OaidClient {
     @Deprecated
-    public Info fetch(Context context) {
+    public static Info fetch(Context context) {
         com.appsflyer.oaid.OaidClient.Info info = new com.appsflyer.oaid.OaidClient(context).fetch();
         if (info != null)
             return new Info(info.getId(), info.getLat());
