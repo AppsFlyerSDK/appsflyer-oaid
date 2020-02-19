@@ -29,8 +29,11 @@ allprojects {
     }
 }
 ```
+Download [aar](oaid/libs/msa_mdid_1.0.13.aar) from [msa alliance](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
+
 module **build.gradle**
 ```groovy
+implementation files('libs/msa_mdid_1.0.13.aar')
 implementation 'com.appsflyer:oaid:5.2.0'
 ```
 ## Standalone usage
@@ -40,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Thread {
-            val info = OaidClient.fetch(this, 1, TimeUnit.SECONDS)
+            val info = OaidClient(this, 1, TimeUnit.SECONDS).fetch()
             if (info != null) {
                 println(info.id)
                 val lat = info.lat

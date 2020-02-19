@@ -12,7 +12,7 @@ android {
     }
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.appsflyer.oaid"
+        applicationId "com.appsflyer.oaid.app"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
@@ -24,10 +24,6 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
         }
-    }
-    compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
     }
 }
 dependencies {

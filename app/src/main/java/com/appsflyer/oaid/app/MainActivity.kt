@@ -13,7 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Thread {
-            val info = OaidClient.fetch(this, 1, TimeUnit.SECONDS)
+            val info = OaidClient(this, 1, TimeUnit.SECONDS).run {
+                setLogging(true)
+                fetch()
+            }
             runOnUiThread {
                 if (info == null) {
                     oaid.text = "No Oaid"

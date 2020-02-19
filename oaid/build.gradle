@@ -16,10 +16,6 @@ android {
         versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
     }
-    compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-    }
 }
 dependencies {
     implementation files('libs/msa_mdid_1.0.13.aar')
