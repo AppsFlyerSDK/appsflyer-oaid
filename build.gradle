@@ -11,10 +11,15 @@ buildscript {
     }
 }
 apply plugin: 'io.codearte.nexus-staging'
+
+def getRepositoryUsername() { return hasProperty('ossrhUsername') ? ossrhUsername : "" }
+
+def getRepositoryPassword() { return hasProperty('ossrhPassword') ? ossrhPassword : "" }
+
 nexusStaging {
     packageGroup = GROUP // optional if packageGroup == project.getGroup()
-    username = hasProperty('ossrhUsername') ? ossrhUsername : ""
-    password = hasProperty('ossrhPassword') ? ossrhPassword : ""
+    username = getRepositoryUsername()
+    password = getRepositoryPassword()
     delayBetweenRetriesInMillis = 30000
     numberOfRetries = 120
 }
