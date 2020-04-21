@@ -1,10 +1,6 @@
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-def isReleaseBuild() {
-    return !VERSION_NAME.contains("SNAPSHOT")
-}
-
 afterEvaluate { project ->
     uploadArchives {
         repositories {
@@ -14,10 +10,7 @@ afterEvaluate { project ->
                 pom.artifactId = POM_ARTIFACT_ID
                 pom.version = VERSION_NAME
                 repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
-                }
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
                 pom.project {
                     name POM_NAME
@@ -47,7 +40,7 @@ afterEvaluate { project ->
         }
     }
     signing {
-        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+        required { gradle.taskGraph.hasTask("uploadArchives") }
         sign configurations.archives
     }
     task androidJavadocs(type: Javadoc) {
