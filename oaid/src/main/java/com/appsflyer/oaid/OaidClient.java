@@ -39,6 +39,21 @@ public class OaidClient {
         this(context, 1, TimeUnit.SECONDS);
     }
 
+    private static boolean isHuawei() {
+        try {
+            return Build.BRAND.equalsIgnoreCase("huawei") ||
+                    (Integer) Class.forName("com.huawei.android.os.BuildEx$VERSION")
+                            .getDeclaredField("EMUI_SDK_INT")
+                            .get(null) > 0;
+        } catch (ClassNotFoundException ignored) {
+            return false;
+        } catch (NoSuchFieldException ignored) {
+            return false;
+        } catch (IllegalAccessException ignored) {
+            return false;
+        }
+    }
+
     /**
      * Blocking call. Time to fetch oaid is 10 - 1000 ms.
      */
@@ -47,7 +62,7 @@ public class OaidClient {
         try {
             long current = System.currentTimeMillis();
             Info info;
-            if (Build.MANUFACTURER.equalsIgnoreCase("huawei")) {
+            if (isHuawei()) {
                 info = fetchHuawei();
                 if (info == null) fetchMsa();
             } else {
