@@ -61,13 +61,7 @@ public class OaidClient {
     public Info fetch() {
         try {
             long current = System.currentTimeMillis();
-            Info info;
-            if (isHuawei()) {
-                info = fetchHuawei();
-                if (info == null) fetchMsa();
-            } else {
-                info = fetchMsa();
-            }
+            Info info = isHuawei() ? fetchHuawei() : fetchMsa();
             logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
             return info;
         } catch (Throwable t) {

@@ -20,7 +20,11 @@ Lenovo          |   ZUI 11.4
 Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Freeme OS, Ssui OS   |   Android 10
 
 ## Adding to your project
-project **build.gradle**
+module **build.gradle**
+```groovy
+implementation 'com.appsflyer:oaid:5.2.0'
+```
+To fetch oaid from Huawei devices add to project **build.gradle**
 ```groovy
 allprojects {
     repositories {
@@ -29,12 +33,10 @@ allprojects {
     }
 }
 ```
-Download [aar](oaid/libs/msa_mdid_1.0.13.aar) from [msa alliance](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
-
-module **build.gradle**
+To fetch oaid from other chinese devices download [aar](oaid/libs/msa_mdid_1.0.13.aar) from [msa alliance](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
+and add to module **build.gradle**
 ```groovy
 implementation files('libs/msa_mdid_1.0.13.aar')
-implementation 'com.appsflyer:oaid:5.2.0'
 ```
 ## Standalone usage
 ```kotlin
