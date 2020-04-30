@@ -29,7 +29,7 @@ allprojects {
     }
 }
 ```
-Download [aar](oaid/libs/msa_mdid_1.0.13.aar) from [msa alliance](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
+Download [AAR](oaid/libs/msa_mdid_1.0.13.aar) provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
 
 module **build.gradle**
 ```groovy
