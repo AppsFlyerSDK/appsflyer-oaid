@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Thread {
             val info = OaidClient(this, 1, TimeUnit.SECONDS).run {
-                setLogging(true)
+                setLogging(BuildConfig.DEBUG)
                 fetch()
             }
             runOnUiThread {
