@@ -33,7 +33,7 @@ allprojects {
     }
 }
 ```
-To fetch oaid from other chinese devices download [aar](oaid/libs/msa_mdid_1.0.13.aar) from [msa alliance](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
+To fetch oaid from other chinese devices download [AAR](oaid/libs/msa_mdid_1.0.13.aar) provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
 and add to module **build.gradle**
 ```groovy
 implementation files('libs/msa_mdid_1.0.13.aar')
