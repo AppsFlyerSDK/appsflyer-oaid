@@ -65,7 +65,7 @@ public class OaidClient {
             logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
             return info;
         } catch (Throwable t) {
-            logger.log(Level.SEVERE, "Fetch", t);
+            logger.log(Level.INFO, "Fetch", t);
             return null;
         }
     }
@@ -80,7 +80,7 @@ public class OaidClient {
                 try {
                     oaidHolder.offer(supplier == null ? "" : supplier.getOAID());
                 } catch (Throwable t) {
-                    logger.log(Level.SEVERE, "IIdentifierListener", t);
+                    logger.log(Level.INFO, "IIdentifierListener", t);
                 }
             }
         });
@@ -121,7 +121,7 @@ public class OaidClient {
                 return null;
             }
         } catch (Throwable t) {
-            logger.log(Level.SEVERE, "Huawei", t);
+            logger.log(Level.INFO, "Huawei", t);
             return null;
         }
     }

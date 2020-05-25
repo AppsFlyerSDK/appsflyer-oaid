@@ -1,7 +1,11 @@
 build/
 local.properties
 *.iml
-.*
-!.gitignore
-gradle*
-!gradle.properties
+.idea/*
+!.idea/dictionaries/
+gradlew*
+.gradle/
+gradle/*
+!gradle/wrapper
+gradle/wrapper/*
+!gradle/wrapper/gradle-wrapper.properties
