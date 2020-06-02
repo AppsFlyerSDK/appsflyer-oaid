@@ -3,7 +3,6 @@
 # OAID collection
 
 [![Release Artifacts](https://img.shields.io/nexus/r/com.appsflyer/oaid.svg?server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/content/repositories/releases/com/appsflyer/oaid/)
-[![Release Artifacts](https://img.shields.io/nexus/r/com.appsflyer/oaid-beta.svg?server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/content/repositories/releases/com/appsflyer/oaid-beta/)
 
 ## Table of content
 - [Adding to your project](#adding-to-your-project)
