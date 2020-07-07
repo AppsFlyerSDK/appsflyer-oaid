@@ -65,50 +65,55 @@ public class OaidClient {
             logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
             return info;
         } catch (Throwable t) {
-            logger.log(Level.INFO, "Fetch", t);
+            logger.info(t.getMessage());
             return null;
         }
     }
 
     @Nullable
-    private Info fetchMsa() throws Exception {
-        final BlockingQueue<String> oaidHolder = new LinkedBlockingQueue<>();
-        JLibrary.InitEntry(context);
-        int result = MdidSdkHelper.InitSdk(context, logger.getLevel() == null, new IIdentifierListener() {
-            @Override
-            public void OnSupport(boolean support, IdSupplier supplier) {
-                try {
-                    oaidHolder.offer(supplier == null ? "" : supplier.getOAID());
-                } catch (Throwable t) {
-                    logger.log(Level.INFO, "IIdentifierListener", t);
+    private Info fetchMsa() {
+        try {
+            final BlockingQueue<String> oaidHolder = new LinkedBlockingQueue<>();
+            JLibrary.InitEntry(context);
+            int result = MdidSdkHelper.InitSdk(context, logger.getLevel() == null, new IIdentifierListener() {
+                @Override
+                public void OnSupport(boolean support, IdSupplier supplier) {
+                    try {
+                        oaidHolder.offer(supplier == null ? "" : supplier.getOAID());
+                    } catch (Throwable t) {
+                        logger.info(t.getMessage());
+                    }
                 }
+            });
+            if (result != 0) {
+                String error;
+                switch (result) {
+                    case ErrorCode.INIT_ERROR_DEVICE_NOSUPPORT:
+                        error = "Unsupported device";
+                        break;
+                    case ErrorCode.INIT_ERROR_LOAD_CONFIGFILE:
+                        error = "Error loading configuration file";
+                        break;
+                    case ErrorCode.INIT_ERROR_MANUFACTURER_NOSUPPORT:
+                        error = "Unsupported manufacturer";
+                        break;
+                    case ErrorCode.INIT_ERROR_RESULT_DELAY:
+                        error = "Callback will be executed in a different thread";
+                        break;
+                    case ErrorCode.INIT_HELPER_CALL_ERROR:
+                        error = "Reflection call error";
+                        break;
+                    default:
+                        error = String.valueOf(result);
+                }
+                logger.warning(error);
             }
-        });
-        if (result != 0) {
-            String error;
-            switch (result) {
-                case ErrorCode.INIT_ERROR_DEVICE_NOSUPPORT:
-                    error = "Unsupported device";
-                    break;
-                case ErrorCode.INIT_ERROR_LOAD_CONFIGFILE:
-                    error = "Error loading configuration file";
-                    break;
-                case ErrorCode.INIT_ERROR_MANUFACTURER_NOSUPPORT:
-                    error = "Unsupported manufacturer";
-                    break;
-                case ErrorCode.INIT_ERROR_RESULT_DELAY:
-                    error = "Callback will be executed in a different thread";
-                    break;
-                case ErrorCode.INIT_HELPER_CALL_ERROR:
-                    error = "Reflection call error";
-                    break;
-                default:
-                    error = String.valueOf(result);
-            }
-            logger.warning(error);
+            String oaid = oaidHolder.poll(timeout, unit);
+            return TextUtils.isEmpty(oaid) ? null : new Info(oaid);
+        } catch (Throwable t) {
+            logger.info(t.getMessage());
+            return null;
         }
-        String oaid = oaidHolder.poll(timeout, unit);
-        return TextUtils.isEmpty(oaid) ? null : new Info(oaid);
     }
 
     @Nullable
@@ -121,7 +126,7 @@ public class OaidClient {
                 return null;
             }
         } catch (Throwable t) {
-            logger.log(Level.INFO, "Huawei", t);
+            logger.info(t.getMessage());
             return null;
         }
     }
