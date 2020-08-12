@@ -4,17 +4,9 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.text.TextUtils;
 
-import com.bun.miitmdid.core.ErrorCode;
-import com.bun.miitmdid.core.JLibrary;
-import com.bun.miitmdid.core.MdidSdkHelper;
-import com.bun.supplier.IIdentifierListener;
-import com.bun.supplier.IdSupplier;
 import com.huawei.hms.ads.identifier.AdvertisingIdClient;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,6 +46,15 @@ public class OaidClient {
         }
     }
 
+    private static boolean isMsaAvailableAtRuntime() {
+        try {
+            Class.forName("com.bun.supplier.IIdentifierListener");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
     /**
      * Blocking call. Time to fetch oaid is 10 - 1000 ms.
      */
@@ -61,55 +62,13 @@ public class OaidClient {
     public Info fetch() {
         try {
             long current = System.currentTimeMillis();
-            Info info = isHuawei() ? fetchHuawei() : fetchMsa();
+            Info info;
+            if (isHuawei()) info = fetchHuawei();
+            else if (isMsaAvailableAtRuntime())
+                info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
+            else info = null;
             logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
             return info;
-        } catch (Throwable t) {
-            logger.info(t.getMessage());
-            return null;
-        }
-    }
-
-    @Nullable
-    private Info fetchMsa() {
-        try {
-            final BlockingQueue<String> oaidHolder = new LinkedBlockingQueue<>();
-            JLibrary.InitEntry(context);
-            int result = MdidSdkHelper.InitSdk(context, logger.getLevel() == null, new IIdentifierListener() {
-                @Override
-                public void OnSupport(boolean support, IdSupplier supplier) {
-                    try {
-                        oaidHolder.offer(supplier == null ? "" : supplier.getOAID());
-                    } catch (Throwable t) {
-                        logger.info(t.getMessage());
-                    }
-                }
-            });
-            if (result != 0) {
-                String error;
-                switch (result) {
-                    case ErrorCode.INIT_ERROR_DEVICE_NOSUPPORT:
-                        error = "Unsupported device";
-                        break;
-                    case ErrorCode.INIT_ERROR_LOAD_CONFIGFILE:
-                        error = "Error loading configuration file";
-                        break;
-                    case ErrorCode.INIT_ERROR_MANUFACTURER_NOSUPPORT:
-                        error = "Unsupported manufacturer";
-                        break;
-                    case ErrorCode.INIT_ERROR_RESULT_DELAY:
-                        error = "Callback will be executed in a different thread";
-                        break;
-                    case ErrorCode.INIT_HELPER_CALL_ERROR:
-                        error = "Reflection call error";
-                        break;
-                    default:
-                        error = String.valueOf(result);
-                }
-                logger.warning(error);
-            }
-            String oaid = oaidHolder.poll(timeout, unit);
-            return TextUtils.isEmpty(oaid) ? null : new Info(oaid);
         } catch (Throwable t) {
             logger.info(t.getMessage());
             return null;
@@ -145,7 +104,6 @@ public class OaidClient {
             this.lat = lat;
         }
 
-        @VisibleForTesting
         public Info(String id) {
             this(id, null);
         }
