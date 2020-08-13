@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Fetching oaid"
         android:textColor="@android:color/black"
+        android:textIsSelectable="true"
         android:textSize="18sp"
         tools:ignore="HardcodedText" />
 
