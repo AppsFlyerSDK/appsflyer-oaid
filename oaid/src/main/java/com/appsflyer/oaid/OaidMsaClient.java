@@ -5,10 +5,9 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.bun.miitmdid.core.ErrorCode;
-import com.bun.miitmdid.core.JLibrary;
 import com.bun.miitmdid.core.MdidSdkHelper;
-import com.bun.supplier.IIdentifierListener;
-import com.bun.supplier.IdSupplier;
+import com.bun.miitmdid.interfaces.IIdentifierListener;
+import com.bun.miitmdid.interfaces.IdSupplier;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -20,7 +19,6 @@ public class OaidMsaClient {
     static OaidClient.Info fetchMsa(Context context, final Logger logger, long timeout, TimeUnit unit) {
         try {
             final BlockingQueue<String> oaidHolder = new LinkedBlockingQueue<>();
-            JLibrary.InitEntry(context);
             int result = MdidSdkHelper.InitSdk(context, logger.getLevel() == null, new IIdentifierListener() {
                 @Override
                 public void OnSupport(boolean support, IdSupplier supplier) {
@@ -48,6 +46,9 @@ public class OaidMsaClient {
                         break;
                     case ErrorCode.INIT_HELPER_CALL_ERROR:
                         error = "Reflection call error";
+                        break;
+                    case ErrorCode.INIT_ERROR_BEGIN:
+                        error = "Init error begin";
                         break;
                     default:
                         error = String.valueOf(result);

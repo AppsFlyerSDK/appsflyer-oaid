@@ -3,7 +3,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         targetSdkVersion 28
-        minSdkVersion 14
+        minSdkVersion 21
         consumerProguardFiles 'proguard-rules.pro'
         ndk { abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64', 'armeabi' }
         packagingOptions {
@@ -18,8 +18,7 @@ android {
     }
 }
 dependencies {
-    implementation files('libs/msa_mdid_1.0.13.aar')
+    implementation files('libs/oaid_sdk_1.0.23.aar')
     implementation 'com.android.support:support-annotations:28.0.0'
-    implementation 'com.huawei.hms:hms-ads-identifier:3.4.26.303'
 }
 apply from: file('publish.gradle')
