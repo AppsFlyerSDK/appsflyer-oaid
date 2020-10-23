@@ -12,31 +12,20 @@ Supported devices:
 
 Manufacturer    |   OS version
 ---             |   ---
-Huawei          |   All
+Huawei          |   HMS 2.6.2
 Xiaomi          |   MIUI 10.2
-Vivo            |   FuntouchOS 9
+Vivo            |   Android 9
 OPPO            |   Color OS 7.0
 Lenovo          |   ZUI 11.4
-Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Freeme OS, Ssui OS   |   Android 10
+Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Black shark, Motorola, Freeme OS |   Android 10
 
 ## Adding to your project
 module **build.gradle**
+
+Download [AAR](oaid/libs/oaid_sdk_1.0.23.aar) provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
 ```groovy
-implementation 'com.appsflyer:oaid:5.2.0'
-```
-To fetch oaid from Huawei devices add to project **build.gradle**
-```groovy
-allprojects {
-    repositories {
-        // ...
-        maven { url 'https://developer.huawei.com/repo/' }
-    }
-}
-```
-To fetch oaid from other devices download [AAR](oaid/libs/msa_mdid_1.0.13.aar) provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
-and add to module **build.gradle**
-```groovy
-implementation files('libs/msa_mdid_1.0.13.aar')
+implementation 'com.appsflyer:oaid:6.1.1'
+implementation files('libs/oaid_sdk_1.0.23.aar')
 ```
 ## Standalone usage
 ```kotlin

@@ -37,18 +37,14 @@ public class OaidClient {
                     (Integer) Class.forName("com.huawei.android.os.BuildEx$VERSION")
                             .getDeclaredField("EMUI_SDK_INT")
                             .get(null) > 0;
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        } catch (NoSuchFieldException ignored) {
-            return false;
-        } catch (IllegalAccessException ignored) {
+        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException ignored) {
             return false;
         }
     }
 
     private static boolean isMsaAvailableAtRuntime() {
         try {
-            Class.forName("com.bun.supplier.IIdentifierListener");
+            Class.forName("com.bun.miitmdid.interfaces.IIdentifierListener");
             return true;
         } catch (ClassNotFoundException e) {
             return false;
@@ -60,19 +56,21 @@ public class OaidClient {
      */
     @Nullable
     public Info fetch() {
-        try {
-            long current = System.currentTimeMillis();
-            Info info;
-            if (isHuawei()) info = fetchHuawei();
-            else if (isMsaAvailableAtRuntime())
-                info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
-            else info = null;
-            logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
-            return info;
-        } catch (Throwable t) {
-            logger.info(t.getMessage());
-            return null;
-        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            try {
+                long current = System.currentTimeMillis();
+                Info info;
+                if (isMsaAvailableAtRuntime())
+                    if (isHuawei()) info = fetchHuawei();
+                    else info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
+                else info = null;
+                logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
+                return info;
+            } catch (Throwable t) {
+                logger.info(t.getMessage());
+                return null;
+            }
+        else return null;
     }
 
     @Nullable
