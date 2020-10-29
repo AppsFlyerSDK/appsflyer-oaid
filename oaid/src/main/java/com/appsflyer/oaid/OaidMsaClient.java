@@ -14,7 +14,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-class OaidMsaClient {
+public class OaidMsaClient {
     @Nullable
     static OaidClient.Info fetchMsa(Context context, final Logger logger, long timeout, TimeUnit unit) {
         try {

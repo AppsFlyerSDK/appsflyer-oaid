@@ -42,6 +42,15 @@ public class OaidClient {
         }
     }
 
+    private static boolean isMsaAvailableAtRuntime() {
+        try {
+            Class.forName("com.bun.miitmdid.interfaces.IIdentifierListener");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
     /**
      * Blocking call. Time to fetch oaid is 10 - 1000 ms.
      */
@@ -50,9 +59,11 @@ public class OaidClient {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             try {
                 long current = System.currentTimeMillis();
-                Info info = isHuawei() ?
-                        fetchHuawei() :
-                        OaidMsaClient.fetchMsa(context, logger, timeout, unit);
+                Info info;
+                if (isMsaAvailableAtRuntime())
+                    if (isHuawei()) info = fetchHuawei();
+                    else info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
+                else info = null;
                 logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
                 return info;
             } catch (Throwable t) {
