@@ -24,7 +24,7 @@ module **build.gradle**
 
 Download [AAR](oaid/libs/oaid_sdk_1.0.23.aar) provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
 ```groovy
-implementation 'com.appsflyer:oaid:6.1.1'
+implementation 'com.appsflyer:oaid:6.1.2'
 implementation files('libs/oaid_sdk_1.0.23.aar')
 ```
 ## Standalone usage

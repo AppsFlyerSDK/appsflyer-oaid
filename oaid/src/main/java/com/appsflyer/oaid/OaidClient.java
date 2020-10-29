@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 
+import com.bun.miitmdid.interfaces.IIdentifierListener;
 import com.huawei.hms.ads.identifier.AdvertisingIdClient;
 
 import java.util.concurrent.TimeUnit;
@@ -44,9 +45,9 @@ public class OaidClient {
 
     private static boolean isMsaAvailableAtRuntime() {
         try {
-            Class.forName("com.bun.miitmdid.interfaces.IIdentifierListener");
+            IIdentifierListener.class.getName();
             return true;
-        } catch (ClassNotFoundException e) {
+        } catch (NoClassDefFoundError e) {
             return false;
         }
     }
@@ -60,9 +61,9 @@ public class OaidClient {
             try {
                 long current = System.currentTimeMillis();
                 Info info;
-                if (isMsaAvailableAtRuntime())
-                    if (isHuawei()) info = fetchHuawei();
-                    else info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
+                if (isHuawei()) info = fetchHuawei();
+                else if (isMsaAvailableAtRuntime())
+                    info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
                 else info = null;
                 logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
                 return info;
