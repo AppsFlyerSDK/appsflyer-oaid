@@ -17,7 +17,7 @@ def getRepositoryUsername() { return hasProperty('ossrhUsername') ? ossrhUsernam
 def getRepositoryPassword() { return hasProperty('ossrhPassword') ? ossrhPassword : "" }
 
 nexusStaging {
-    packageGroup = GROUP // optional if packageGroup == project.getGroup()
+    packageGroup = GROUP
     username = getRepositoryUsername()
     password = getRepositoryPassword()
     delayBetweenRetriesInMillis = 30000

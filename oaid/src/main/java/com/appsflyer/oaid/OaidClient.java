@@ -57,32 +57,28 @@ public class OaidClient {
      */
     @Nullable
     public Info fetch() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            try {
-                long current = System.currentTimeMillis();
-                Info info;
-                if (isHuawei()) info = fetchHuawei();
-                else if (isMsaAvailableAtRuntime())
-                    info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
-                else info = null;
-                logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
-                return info;
-            } catch (Throwable t) {
-                logger.info(t.getMessage());
-                return null;
-            }
-        else return null;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return null;
+        try {
+            long current = System.currentTimeMillis();
+            Info info;
+            if (isHuawei()) info = fetchHuawei();
+            else if (isMsaAvailableAtRuntime())
+                info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
+            else info = null;
+            logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
+            return info;
+        } catch (Throwable t) {
+            logger.info(t.getMessage());
+            return null;
+        }
     }
 
     @Nullable
     private Info fetchHuawei() {
         try {
-            if (AdvertisingIdClient.isAdvertisingIdAvailable(context)) {
-                AdvertisingIdClient.Info info = AdvertisingIdClient.getAdvertisingIdInfo(context);
-                return new Info(info.getId(), info.isLimitAdTrackingEnabled());
-            } else {
-                return null;
-            }
+            if (!AdvertisingIdClient.isAdvertisingIdAvailable(context)) return null;
+            AdvertisingIdClient.Info info = AdvertisingIdClient.getAdvertisingIdInfo(context);
+            return new Info(info.getId(), info.isLimitAdTrackingEnabled());
         } catch (Throwable t) {
             logger.info(t.getMessage());
             return null;
