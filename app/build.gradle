@@ -30,9 +30,10 @@ android {
         targetCompatibility = 1.8
     }
     kotlinOptions.jvmTarget = '1.8'
+    sourceSets.all { java.srcDir("src/$name/kotlin") }
 }
 dependencies {
     implementation project(':oaid')
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

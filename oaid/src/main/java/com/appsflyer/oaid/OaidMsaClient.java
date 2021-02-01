@@ -1,7 +1,7 @@
 package com.appsflyer.oaid;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.bun.miitmdid.core.ErrorCode;
