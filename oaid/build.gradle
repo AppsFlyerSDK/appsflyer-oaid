@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
     defaultConfig {
         targetSdkVersion 28
         minSdkVersion 21
@@ -16,9 +17,15 @@ android {
         versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
     }
+    sourceSets.all { java.srcDir("src/$name/kotlin") }
+    testOptions.unitTests.includeAndroidResources = true
 }
 dependencies {
     implementation files('libs/oaid_sdk_1.0.23.aar')
-    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.robolectric:robolectric:4.5'
+    testImplementation 'androidx.test.ext:junit:1.1.2'
 }
 apply from: file('publish.gradle')

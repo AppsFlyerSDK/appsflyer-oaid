@@ -2,12 +2,14 @@ package com.appsflyer.oaid;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.bun.miitmdid.interfaces.IIdentifierListener;
 import com.huawei.hms.ads.identifier.AdvertisingIdClient;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,9 +78,16 @@ public class OaidClient {
     @Nullable
     private Info fetchHuawei() {
         try {
-            if (!AdvertisingIdClient.isAdvertisingIdAvailable(context)) return null;
-            AdvertisingIdClient.Info info = AdvertisingIdClient.getAdvertisingIdInfo(context);
-            return new Info(info.getId(), info.isLimitAdTrackingEnabled());
+            FutureTask<Info> task = new FutureTask<>(new Callable<Info>() {
+                @Override
+                public Info call() {
+                    if (!AdvertisingIdClient.isAdvertisingIdAvailable(context)) return null;
+                    AdvertisingIdClient.Info info = AdvertisingIdClient.getAdvertisingIdInfo(context);
+                    return new Info(info.getId(), info.isLimitAdTrackingEnabled());
+                }
+            });
+            new Thread(task).start();
+            return task.get(timeout, unit);
         } catch (Throwable t) {
             logger.info(t.getMessage());
             return null;
