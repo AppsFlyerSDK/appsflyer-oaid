@@ -10,7 +10,8 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.Implementation
 import org.robolectric.annotation.Implements
 import org.robolectric.shadows.ShadowBuild
-import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeUnit.SECONDS
+import kotlin.system.measureTimeMillis
 
 @Config(shadows = [Huawei.ShadowAdvertisingIdClient::class])
 @RunWith(AndroidJUnit4::class)
@@ -38,9 +39,12 @@ class Huawei {
     fun timeout() {
         val delay = 2L
         ShadowAdvertisingIdClient.delay = delay
-        OaidClient(getApplicationContext(), delay / 2, TimeUnit.SECONDS)
-            .fetch()
-            .let { Assert.assertNull(it) }
+        val timeout = delay / 2
+        measureTimeMillis {
+            OaidClient(getApplicationContext(), timeout, SECONDS)
+                .fetch()
+                .let { Assert.assertNull(it) }
+        }.let { Assert.assertTrue(SECONDS.toMillis(timeout) < it && it < SECONDS.toMillis(delay)) }
     }
 
     @Suppress("unused", "UNUSED_PARAMETER")
@@ -56,7 +60,7 @@ class Huawei {
             @JvmStatic
             @Implementation
             fun getAdvertisingIdInfo(context: Context): AdvertisingIdClient.Info {
-                TimeUnit.SECONDS.sleep(delay)
+                SECONDS.sleep(delay)
                 return AdvertisingIdClient.Info(id, false)
             }
         }
