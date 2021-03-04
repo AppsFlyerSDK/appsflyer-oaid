@@ -24,7 +24,7 @@ dependencies {
     implementation files('libs/oaid_sdk_1.0.23.aar')
     implementation 'androidx.annotation:annotation:1.1.0'
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.1'
     testImplementation 'org.robolectric:robolectric:4.5'
     testImplementation 'androidx.test.ext:junit:1.1.2'
 }
