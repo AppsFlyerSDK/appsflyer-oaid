@@ -19,7 +19,7 @@ OPPO            |   Color OS 7.0
 Lenovo          |   ZUI 11.4
 Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Black shark, Motorola, Freeme OS |   Android 10
 
-Oaid requires Android API 21+.
+Oaid requires Android API 21+
 
 ## Adding to your project
 module **build.gradle**
