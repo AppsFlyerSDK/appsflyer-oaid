@@ -64,5 +64,18 @@ class Huawei {
                 return AdvertisingIdClient.Info(id, false)
             }
         }
+
+        @Implements(AdvertisingIdClient.Info::class)
+        class ShadowInfo {
+            @Implementation
+            fun getId(): String {
+                return id
+            }
+
+            @Implementation
+            fun isLimitAdTrackingEnabled(): Boolean {
+                return false
+            }
+        }
     }
 }
