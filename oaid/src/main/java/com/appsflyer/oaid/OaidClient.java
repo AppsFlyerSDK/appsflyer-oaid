@@ -41,7 +41,11 @@ public class OaidClient {
                     (Integer) Class.forName("com.huawei.android.os.BuildEx$VERSION")
                             .getDeclaredField("EMUI_SDK_INT")
                             .get(null) > 0;
-        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException ignored) {
+        } catch (ClassNotFoundException ignored) {
+            return false;
+        } catch (NoSuchFieldException ignored) {
+            return false;
+        } catch (IllegalAccessException ignored) {
             return false;
         }
     }
