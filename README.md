@@ -24,7 +24,7 @@ Download AAR provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to
 **Note:** MSA AAR requires min API level 21
 ```groovy
 implementation 'com.appsflyer:oaid:6.1.2'
-implementation files('libs/oaid_sdk_1.0.23.aar')
+implementation files('libs/oaid_sdk_1.0.29.aar')
 ```
 ## Standalone usage
 ```kotlin
