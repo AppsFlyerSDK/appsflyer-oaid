@@ -4,7 +4,7 @@ android {
     compileSdkVersion 30
     defaultConfig {
         targetSdkVersion 28
-        minSdkVersion 21
+        minSdkVersion 17
         consumerProguardFiles 'proguard-rules.pro'
         ndk { abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64', 'armeabi' }
         packagingOptions {
@@ -21,7 +21,7 @@ android {
     testOptions.unitTests.includeAndroidResources = true
 }
 dependencies {
-    implementation files('libs/oaid_sdk_1.0.23.aar')
+    implementation files('libs/oaid_sdk_1.0.29.aar')
     implementation 'androidx.annotation:annotation:1.1.0'
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.13.1'

@@ -32,8 +32,12 @@ android {
     kotlinOptions.jvmTarget = '1.8'
     sourceSets.all { java.srcDir("src/$name/kotlin") }
 }
+repositories {
+    maven { url 'https://developer.huawei.com/repo/' }
+}
 dependencies {
     implementation project(':oaid')
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.huawei.hms:ads-identifier:3.4.39.302'
 }

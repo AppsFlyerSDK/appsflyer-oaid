@@ -17,12 +17,11 @@ OPPO            |   Color OS 7.0
 Lenovo          |   ZUI 11.4
 Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Black shark, Motorola, Freeme OS |   Android 10
 
-Oaid requires Android API 21+
-
 ## Adding to your project
 module **build.gradle**
 
-Download [AAR](oaid/libs/oaid_sdk_1.0.23.aar) provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
+Download AAR provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
+**Note:** MSA AAR requires min API level 21
 ```groovy
 implementation 'com.appsflyer:oaid:6.1.2'
 implementation files('libs/oaid_sdk_1.0.23.aar')
