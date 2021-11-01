@@ -1,9 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     defaultConfig {
-        targetSdkVersion 28
+        targetSdkVersion 31
         minSdkVersion 17
         consumerProguardFiles 'proguard-rules.pro'
         ndk { abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64', 'armeabi' }
