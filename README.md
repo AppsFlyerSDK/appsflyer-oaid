@@ -15,7 +15,9 @@ Xiaomi          |   MIUI 10.2
 Vivo            |   Android 9
 OPPO            |   Color OS 7.0
 Lenovo          |   ZUI 11.4
-Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Black shark, Motorola, Freeme OS |   Android 10
+Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Black shark, Motorola, Freeme OS |   Android 10\
+
+**Supported MSA library version:** 1.0.23
 
 ## Adding to your project
 module **build.gradle**
@@ -24,7 +26,7 @@ Download AAR provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to
 **Note:** MSA AAR requires min API level 21
 ```groovy
 implementation 'com.appsflyer:oaid:6.1.2'
-implementation files('libs/oaid_sdk_1.0.29.aar')
+implementation files('libs/oaid_sdk_1.0.23.aar')
 ```
 ## Standalone usage
 ```kotlin
