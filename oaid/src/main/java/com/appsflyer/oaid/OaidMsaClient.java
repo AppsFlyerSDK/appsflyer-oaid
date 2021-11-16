@@ -21,7 +21,7 @@ class OaidMsaClient {
             final BlockingQueue<String> oaidHolder = new LinkedBlockingQueue<>();
             int result = MdidSdkHelper.InitSdk(context, logger.getLevel() == null, new IIdentifierListener() {
                 @Override
-                public void onSupport(IdSupplier supplier) {
+                public void OnSupport(boolean support, IdSupplier supplier) {
                     try {
                         oaidHolder.offer(supplier == null ? "" : supplier.getOAID());
                     } catch (Throwable t) {

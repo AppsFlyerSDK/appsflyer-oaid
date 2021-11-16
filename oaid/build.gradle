@@ -1,9 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 android {
-    compileSdkVersion 31
+    compileSdkVersion 30
     defaultConfig {
-        targetSdkVersion 31
+        targetSdkVersion 30
         minSdkVersion 17
         consumerProguardFiles 'proguard-rules.pro'
         ndk { abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64', 'armeabi' }
@@ -20,9 +20,12 @@ android {
     sourceSets.all { java.srcDir("src/$name/kotlin") }
     testOptions.unitTests.includeAndroidResources = true
 }
+repositories {maven { url 'https://developer.huawei.com/repo/' } }
 dependencies {
-    implementation files('libs/oaid_sdk_1.0.29.aar')
+    compileOnly files('libs/oaid_sdk_1.0.23.aar')
+    compileOnly 'com.huawei.hms:ads-identifier:3.4.39.302'
     implementation 'androidx.annotation:annotation:1.1.0'
+    testImplementation 'com.huawei.hms:ads-identifier:3.4.39.302'
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'org.robolectric:robolectric:4.5'

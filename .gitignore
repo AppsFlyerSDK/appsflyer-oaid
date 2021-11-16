@@ -1,5 +1,5 @@
 build/
-oaid/libs/oaid_sdk_1.0.29.aar
+oaid/libs/
 local.properties
 *.iml
 .idea/*
