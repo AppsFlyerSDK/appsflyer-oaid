@@ -1,17 +1,18 @@
 buildscript {
-    ext.kotlin_version = '1.4.30'
+    ext.kotlin_version = '1.6.10'
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.4'
-        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.2"
+        classpath "com.android.tools.build:gradle:7.1.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-apply plugin: 'io.codearte.nexus-staging'
-
+plugins {
+    id "io.codearte.nexus-staging" version "0.30.0"
+}
 def getRepositoryUsername() { return hasProperty('ossrhUsername') ? ossrhUsername : "" }
 
 def getRepositoryPassword() { return hasProperty('ossrhPassword') ? ossrhPassword : "" }

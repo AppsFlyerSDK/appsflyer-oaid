@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Build;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
 import com.bun.miitmdid.interfaces.IIdentifierListener;
 import com.huawei.hms.ads.identifier.AdvertisingIdClient;
@@ -68,10 +67,14 @@ public class OaidClient {
         try {
             long current = System.currentTimeMillis();
             Info info;
-            if (isHuawei()) info = fetchHuawei();
-            else if (isMsaAvailableAtRuntime())
+            if (isMsaAvailableAtRuntime()) {
                 info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
-            else info = null;
+            } else if (isHuawei()) { // Huawei HMS library is now included in MSA. Look for HMS only
+                // when MSA is not available
+                info = fetchHuawei();
+            } else {
+                info = null;
+            }
             logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
             return info;
         } catch (Throwable t) {
@@ -107,7 +110,6 @@ public class OaidClient {
         private final Boolean lat;
         private final String id;
 
-        @VisibleForTesting
         public Info(String id, Boolean lat) {
             this.id = id;
             this.lat = lat;
