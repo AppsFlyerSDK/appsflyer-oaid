@@ -2,6 +2,7 @@ package com.appsflyer.oaid;
 
 import android.content.Context;
 import android.os.Build;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
@@ -40,7 +41,11 @@ public class OaidClient {
                     (Integer) Class.forName("com.huawei.android.os.BuildEx$VERSION")
                             .getDeclaredField("EMUI_SDK_INT")
                             .get(null) > 0;
-        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException ignored) {
+        } catch (ClassNotFoundException ignored) {
+            return false;
+        } catch (NoSuchFieldException ignored) {
+            return false;
+        } catch (IllegalAccessException ignored) {
             return false;
         }
     }
@@ -81,8 +86,8 @@ public class OaidClient {
             FutureTask<Info> task = new FutureTask<>(new Callable<Info>() {
                 @Override
                 public Info call() {
-                    if (!AdvertisingIdClient.isAdvertisingIdAvailable(context)) return null;
                     AdvertisingIdClient.Info info = AdvertisingIdClient.getAdvertisingIdInfo(context);
+                    if (info == null) return null;
                     return new Info(info.getId(), info.isLimitAdTrackingEnabled());
                 }
             });

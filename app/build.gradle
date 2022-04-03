@@ -10,11 +10,11 @@ android {
             keyPassword 'afoaid'
         }
     }
-    compileSdkVersion 28
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.appsflyer.oaid.app"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion 17
+        targetSdkVersion 31
         versionCode 1
         versionName '1'
         signingConfig signingConfigs.release
@@ -32,7 +32,11 @@ android {
     kotlinOptions.jvmTarget = '1.8'
     sourceSets.all { java.srcDir("src/$name/kotlin") }
 }
+ repositories {maven { url 'https://developer.huawei.com/repo/' } }
 dependencies {
+    // You can choose either HMS dependency (minSDK=17) or MSA (minSDK=21)
+//    implementation files('libs/oaid_sdk_1.0.23.aar')
+    implementation 'com.huawei.hms:ads-identifier:3.4.39.302'
     implementation project(':oaid')
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

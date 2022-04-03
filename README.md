@@ -1,5 +1,3 @@
-<img src="https://www.appsflyer.com/wp-content/uploads/2016/11/logo-1.svg"  width="450">
-
 # OAID collection
 
 [![Release Artifacts](https://img.shields.io/nexus/r/com.appsflyer/oaid.svg?server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/content/repositories/releases/com/appsflyer/oaid/)
@@ -17,12 +15,15 @@ Xiaomi          |   MIUI 10.2
 Vivo            |   Android 9
 OPPO            |   Color OS 7.0
 Lenovo          |   ZUI 11.4
-Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Black shark, Motorola, Freeme OS |   Android 10
+Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Black shark, Motorola, Freeme OS |   Android 10\
+
+**Supported MSA library version:** 1.0.23
 
 ## Adding to your project
 module **build.gradle**
 
-Download [AAR](oaid/libs/oaid_sdk_1.0.23.aar) provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
+Download AAR provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder
+**Note:** MSA AAR requires min API level 21
 ```groovy
 implementation 'com.appsflyer:oaid:6.1.2'
 implementation files('libs/oaid_sdk_1.0.23.aar')
