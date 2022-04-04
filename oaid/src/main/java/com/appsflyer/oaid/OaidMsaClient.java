@@ -20,15 +20,16 @@ import java.util.logging.Logger;
 
 class OaidMsaClient {
     private static boolean isCertInit = false;
-    private static final String cerPattern = "%s.cert.pem";
+    private static final String CER_PATTERN = "%s.cert.pem";
+    private static final String MAS_NATIVE_LIB = "msaoaidsec";
 
     @Nullable
     static OaidClient.Info fetchMsa(Context context, final Logger logger, long timeout, TimeUnit unit) {
         try {
-            System.loadLibrary("msaoaidsec");
+            loadNativeLibrary();
             if (!isCertInit) {
                 try {
-                    isCertInit = MdidSdkHelper.InitCert(context, loadPemFromAssetFile(context, String.format(cerPattern, context.getPackageName()), logger));
+                    isCertInit = MdidSdkHelper.InitCert(context, loadPemFromAssetFile(context, String.format(CER_PATTERN, context.getPackageName()), logger));
                 } catch (Throwable e) {
                     logger.warning(e.getMessage());
                 }
@@ -86,7 +87,11 @@ class OaidMsaClient {
         }
     }
 
-    public static String loadPemFromAssetFile(Context context, String assetFileName, Logger logger) {
+    protected static void loadNativeLibrary() {
+        System.loadLibrary(MAS_NATIVE_LIB);
+    }
+
+    private static String loadPemFromAssetFile(Context context, String assetFileName, Logger logger) {
         try {
             InputStream is = context.getAssets().open(assetFileName);
             BufferedReader in = new BufferedReader(new InputStreamReader(is));

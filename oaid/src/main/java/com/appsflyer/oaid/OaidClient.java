@@ -67,11 +67,10 @@ public class OaidClient {
         try {
             long current = System.currentTimeMillis();
             Info info;
-            if (isMsaAvailableAtRuntime()) {
-                info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
-            } else if (isHuawei()) { // Huawei HMS library is now included in MSA. Look for HMS only
-                // when MSA is not available
+            if (isHuawei()) {
                 info = fetchHuawei();
+            } else if (isMsaAvailableAtRuntime()) {
+                info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
             } else {
                 info = null;
             }
@@ -86,6 +85,10 @@ public class OaidClient {
     @Nullable
     private Info fetchHuawei() {
         try {
+            if (isMsaAvailableAtRuntime()) {
+                // load native implementation from MSA SDK
+                OaidMsaClient.loadNativeLibrary();
+            }
             FutureTask<Info> task = new FutureTask<>(new Callable<Info>() {
                 @Override
                 public Info call() {
@@ -115,17 +118,10 @@ public class OaidClient {
             this.lat = lat;
         }
 
-        public Info(String id) {
-            this(id, null);
-        }
-
         public String getId() {
             return id;
         }
-
-        /**
-         * Available only in Huawei
-         */
+        
         @Nullable
         public Boolean getLat() {
             return lat;
