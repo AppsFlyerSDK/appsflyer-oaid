@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Build;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
 import com.bun.miitmdid.interfaces.IIdentifierListener;
 import com.huawei.hms.ads.identifier.AdvertisingIdClient;
@@ -68,10 +67,14 @@ public class OaidClient {
         try {
             long current = System.currentTimeMillis();
             Info info;
-            if (isHuawei()) info = fetchHuawei();
-            else if (isMsaAvailableAtRuntime())
+            if (isHuawei()) {
+                // https://appsflyer.slack.com/archives/CND7H0BCG/p1608114849014300?thread_ts=1608101256.012600&cid=CND7H0BCG
+                info = fetchHuawei();
+            } else if (isMsaAvailableAtRuntime()) {
                 info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
-            else info = null;
+            } else {
+                info = null;
+            }
             logger.info("Fetch " + (System.currentTimeMillis() - current) + " ms");
             return info;
         } catch (Throwable t) {
@@ -83,6 +86,10 @@ public class OaidClient {
     @Nullable
     private Info fetchHuawei() {
         try {
+            if (isMsaAvailableAtRuntime()) {
+                // load native implementation from MSA SDK
+                OaidMsaClient.loadNativeLibrary();
+            }
             FutureTask<Info> task = new FutureTask<>(new Callable<Info>() {
                 @Override
                 public Info call() {
@@ -107,23 +114,15 @@ public class OaidClient {
         private final Boolean lat;
         private final String id;
 
-        @VisibleForTesting
         public Info(String id, Boolean lat) {
             this.id = id;
             this.lat = lat;
         }
 
-        public Info(String id) {
-            this(id, null);
-        }
-
         public String getId() {
             return id;
         }
-
-        /**
-         * Available only in Huawei
-         */
+        
         @Nullable
         public Boolean getLat() {
             return lat;
