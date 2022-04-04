@@ -121,6 +121,5 @@ signing {
     sign publishing.publications
 }
 
-
 publish.dependsOn build
 publishToMavenLocal.dependsOn build

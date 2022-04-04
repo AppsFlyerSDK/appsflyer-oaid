@@ -68,6 +68,7 @@ public class OaidClient {
             long current = System.currentTimeMillis();
             Info info;
             if (isHuawei()) {
+                // https://appsflyer.slack.com/archives/CND7H0BCG/p1608114849014300?thread_ts=1608101256.012600&cid=CND7H0BCG
                 info = fetchHuawei();
             } else if (isMsaAvailableAtRuntime()) {
                 info = OaidMsaClient.fetchMsa(context, logger, timeout, unit);
