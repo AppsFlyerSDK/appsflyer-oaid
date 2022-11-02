@@ -1,9 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     defaultConfig {
-        targetSdkVersion 31
+        targetSdkVersion 32
         minSdkVersion 17
         buildConfigField "String", "VERSION_NAME", "\"$VERSION_NAME\""
         buildConfigField "String", "VERSION_CODE", "\"$VERSION_CODE\""
@@ -25,13 +25,13 @@ android {
 }
 repositories { maven { url 'https://developer.huawei.com/repo/' } }
 dependencies {
-    compileOnly files('libs/oaid_sdk_1.1.0.aar')
+    compileOnly files('libs/oaid_sdk_2.0.0.aar')
     compileOnly 'com.huawei.hms:ads-identifier:3.4.39.302'
-    implementation 'androidx.annotation:annotation:1.3.0'
+    implementation 'androidx.annotation:annotation:1.5.0'
     testImplementation 'com.huawei.hms:ads-identifier:3.4.39.302'
-    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.robolectric:robolectric:4.7.3'
+    testImplementation 'org.robolectric:robolectric:4.8.1'
     testImplementation 'androidx.test.ext:junit:1.1.3'
 }
 apply from: file('publish.gradle')
