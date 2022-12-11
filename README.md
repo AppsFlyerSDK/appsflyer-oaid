@@ -75,13 +75,20 @@ Add the following code to your `proguard-rules.pro` file:
 ```kotlin  
 class MainActivity : AppCompatActivity() {  
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState) setContentView (R.layout.activity_main) Thread {
-            val info = OaidClient(this, 1, TimeUnit.SECONDS).fetch() if (info != null) {
-            println(info.id)
-            val lat = info.lat if (lat != null) println(lat)
-        }
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        Thread {
+            val info = OaidClient(this, 1, TimeUnit.SECONDS).fetch()
+            if (info != null) {
+                println(info.id)
+                val lat = info.lat
+                if (lat != null) {
+                    println(lat)
+                }
+            }
         }.start()
     }
+  }
     
  ```
 
