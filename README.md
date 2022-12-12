@@ -26,8 +26,8 @@ module **build.gradle**
 Download AAR provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder  
 **Note:** MSA AAR requires min API level 16
 ```groovy  
-implementation 'com.appsflyer:oaid:6.5.4'  
-implementation files('libs/oaid_sdk_1.1.0.aar')  
+implementation 'com.appsflyer:oaid:6.9.0'  
+implementation files('libs/oaid_sdk_2.0.0.aar')  
 ```  
 
 #### Step 2
