@@ -47,7 +47,7 @@ android {
 repositories { maven { url 'https://developer.huawei.com/repo/' } }
 dependencies {
     // You can choose either HMS dependency (minSDK=17) or MSA (minSDK=21)
-    implementation files('../oaid/libs/oaid_sdk_2.0.0.aar')
+    implementation files('../oaid/libs/oaid_sdk_2.2.0.aar')
     //implementation 'com.huawei.hms:ads-identifier:3.4.39.302'
     implementation project(':oaid')
     implementation 'androidx.appcompat:appcompat:1.5.1'
