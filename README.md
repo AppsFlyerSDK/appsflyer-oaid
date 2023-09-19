@@ -18,7 +18,7 @@ OPPO, Realme    |   Color OS 3
 Lenovo          |   ZUI 11.4
 Samsung, Meizu, Nubia, ZTE, ASUS, OnePlus, Black shark, Motorola, Freeme OS  |   Android 10
 
-**Supported MSA library version:** 1.1.0
+**Supported MSA library version:** 2.2.0
 
 ## Adding to your project
 module **build.gradle**
@@ -26,8 +26,8 @@ module **build.gradle**
 Download AAR provided by the [MSA](http://www.msa-alliance.cn/col.jsp?id=120) to your module libs folder  
 **Note:** MSA AAR requires min API level 16
 ```groovy  
-implementation 'com.appsflyer:oaid:6.9.0'  
-implementation files('libs/oaid_sdk_2.0.0.aar')  
+implementation 'com.appsflyer:oaid:6.12.3-rc1'  
+implementation files('libs/oaid_sdk_2.2.0.aar')  
 ```  
 
 #### Step 2
