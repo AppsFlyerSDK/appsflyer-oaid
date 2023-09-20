@@ -1,5 +1,4 @@
 build/
-oaid/libs/
 local.properties
 *.iml
 .idea/*
